@@ -11,28 +11,30 @@ const ContactPage: React.FC = () => {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:5000/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-      });
+  try {
+    const response = await fetch("http://localhost:5000/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message }),
+    });
 
-      if (response.ok) {
-        setStatus("success");
-        setName("");
-        setEmail("");
-        setMessage("");
-        setTimeout(() => setStatus("idle"), 5000); // Reset après 5s
-      } else {
-        setStatus("error");
-      }
-    } catch (err) {
+    if (response.ok) {
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+      setTimeout(() => setStatus("idle"), 5000); // Reset après 5s
+    } else {
       setStatus("error");
     }
-  };
+  } catch (err) {
+    console.error("Erreur lors de l'envoi du message :", err);
+    setStatus("error");
+  }
+};
+
 
   return (
     <div className="flex flex-col min-h-screen">

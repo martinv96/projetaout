@@ -219,12 +219,12 @@ export default function Home() {
             Explorez notre collection pour tous les goûts. Que vous soyez
             débutant ou chef expérimenté, trouvez l’inspiration pour vos repas !
           </p>
-          <a
+          <Link
             href="/recipes"
             className="inline-block bg-yellow-400 text-gray-900 px-8 py-4 rounded-full font-bold hover:bg-yellow-500 transition transform hover:scale-105"
           >
             Voir les recettes
-          </a>
+          </Link>
         </div>
       </motion.section>
 
@@ -346,15 +346,15 @@ export default function Home() {
       <footer className="bg-yellow-400 text-white py-6 mt-auto flex flex-col items-center gap-4">
         <p>&copy; 2025 CookMaster. Tous droits réservés.</p>
         <div className="flex gap-4">
-          <a href="#" className="hover:text-yellow-100 transition">
+          <Link href="#" className="hover:text-yellow-100 transition">
             Facebook
-          </a>
-          <a href="#" className="hover:text-yellow-100 transition">
+          </Link>
+          <Link href="#" className="hover:text-yellow-100 transition">
             Instagram
-          </a>
-          <a href="#" className="hover:text-yellow-100 transition">
+          </Link>
+          <Link href="#" className="hover:text-yellow-100 transition">
             Twitter
-          </a>
+          </Link>
         </div>
       </footer>
     </div>
