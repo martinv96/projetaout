@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     },
   });
 
-  const logoPath = path.join(process.cwd(), "public", "logo.PNG");
+  const logoPath = path.join(process.cwd(), "public", "logo.JPG");
   const logoExists = fs.existsSync(logoPath);
 
   const mailOptions = {
