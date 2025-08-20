@@ -1,21 +1,18 @@
+// app/api/subscribe/route.js
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const handler = async (req, res) => {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Méthode non autorisée" });
-  }
-
-  const { email } = req.body;
+export async function POST(req) {
+  const { email } = await req.json();
 
   if (!email) {
-    return res.status(400).json({ error: "Email requis" });
+    return new Response(JSON.stringify({ error: "Email requis" }), { status: 400 });
   }
 
   try {
     await resend.emails.send({
-      from: "CookMaster <no-reply@cookmaster.com>",
+      from: "CookMaster <onboarding@resend.dev>",
       to: email,
       subject: "Bienvenue sur CookMaster 🍳",
       html: `
@@ -33,10 +30,9 @@ const handler = async (req, res) => {
       `,
     });
 
-    return res.status(200).json({ success: true });
+    return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (err) {
-    return res.status(500).json({ error: err.message });
+    console.error("Erreur lors de l'envoi de l'email :", err);
+    return new Response(JSON.stringify({ error: "Impossible d'envoyer l'email" }), { status: 500 });
   }
-};
-
-export default handler;
+}
