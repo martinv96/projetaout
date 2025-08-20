@@ -3,12 +3,15 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Mail, Phone, InstagramIcon, FacebookIcon, X, } from "lucide-react";
 
 const ContactPage: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [emailNewsletter, setEmailNewsletter] = useState("");
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
@@ -45,7 +48,7 @@ const ContactPage: React.FC = () => {
         transition={{ duration: 0.8 }}
         className="bg-yellow-400 text-white px-8 py-6 shadow-md flex justify-between items-center"
       >
-        <h1 className="text-2xl font-bold">CookMaster</h1>
+        <Link href="/" className="text-2xl font-bold">CookMaster</Link>
         <nav className="space-x-4">
           <Link href="/" className="hover:text-yellow-100 transition">
             Accueil
@@ -53,7 +56,7 @@ const ContactPage: React.FC = () => {
           <Link href="/recipes" className="hover:text-yellow-100 transition">
             Recettes
           </Link>
-          <Link href="/contact" className="hover:text-yellow-100 transition">
+          <Link href="/contact" className="hover:text-yellow-100 transition font-semibold">
             Contact
           </Link>
         </nav>
@@ -113,21 +116,95 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-yellow-400 text-white py-6 flex flex-col items-center gap-4">
-        <p>&copy; 2025 CookMaster. Tous droits réservés.</p>
-        <div className="flex gap-4">
-          <a href="#" className="hover:text-yellow-100 transition">
-            Facebook
-          </a>
-          <a href="#" className="hover:text-yellow-100 transition">
-            Instagram
-          </a>
-          <a href="#" className="hover:text-yellow-100 transition">
-            Twitter
-          </a>
+      {/* FOOTER */}<footer className="bg-yellow-400 text-white py-10 mt-auto">
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        {/* LOGO + COPYRIGHT */}
+        <div>
+          <h2 className="text-2xl font-bold">CookMaster</h2>
+          <p className="mt-2">&copy; 2025 CookMaster. Tous droits réservés.</p>
         </div>
-      </footer>
+
+        {/* NAVIGATION RAPIDE */}
+        <div>
+          <h3 className="font-semibold mb-3">Navigation</h3>
+          <ul className="space-y-2">
+            <li><Link href="/" className="hover:underline">Accueil</Link></li>
+            <li><Link href="/recipes" className="hover:underline">Recettes</Link></li>
+            <li><Link href="/about" className="hover:underline">À propos</Link></li>
+            <li><Link href="/contact" className="hover:underline">Contact</Link></li>
+          </ul>
+        </div>
+
+        {/* CONTACT */}
+        <div>
+          <h3 className="font-semibold mb-3">Contact</h3>
+          <p className="flex items-center gap-2">
+            <Mail size={18} /> support@cookmaster.com
+          </p>
+          <p className="flex items-center gap-2 mt-2">
+            <Phone size={18} /> +33 6 12 34 56 78
+          </p>
+        </div>
+
+        {/* RÉSEAUX + NEWSLETTER */}
+        <div>
+          <h3 className="font-semibold mb-3">Suivez-nous</h3>
+          <div className="flex gap-4 mb-4">
+            <Link href="#" className="hover:opacity-80">
+              <FacebookIcon />
+            </Link>
+            <Link href="#" className="hover:opacity-80">
+              <InstagramIcon />
+            </Link>
+            <Link href="#" className="hover:opacity-80">
+              <X />
+            </Link>
+          </div>
+          <form 
+  className="flex flex-col gap-2"
+  onSubmit={async (e) => {
+    e.preventDefault();
+    if (!emailNewsletter) return;
+
+    try {
+      const res = await fetch("/api/subscribe", { // crée un endpoint newsletter
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: emailNewsletter }),
+      });
+
+      if (res.ok) {
+        alert("Merci pour votre inscription !");
+        setEmailNewsletter("");
+      } else {
+        alert("Une erreur est survenue, réessayez.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Erreur lors de l'inscription.");
+    }
+  }}
+>
+  <input
+    type="email"
+    placeholder="Votre email"
+    className="px-3 py-2 rounded text-gray-800"
+    value={emailNewsletter}
+    onChange={(e) => setEmailNewsletter(e.target.value)}
+    required
+  />
+  <button
+    type="submit"
+    className="bg-white text-yellow-500 font-bold rounded py-2 hover:bg-yellow-100 transition"
+  >
+    S’abonner
+  </button>
+</form>
+
+        </div>
+      </div>
+    </footer>
     </div>
   );
 };

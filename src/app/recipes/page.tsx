@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import recipes from "../../data/recipes";
 import recipesViande from "../../data/viandes";
+import { Mail, Phone, InstagramIcon, FacebookIcon, X, } from "lucide-react";
 
 export default function RecipesPage() {
   return (
@@ -128,21 +129,67 @@ export default function RecipesPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-yellow-400 text-white py-6 mt-auto flex flex-col items-center gap-4">
-        <p>&copy; 2025 CookMaster. Tous droits réservés.</p>
-        <div className="flex gap-4">
-          <a href="#" className="hover:text-yellow-100 transition">
-            Facebook
-          </a>
-          <a href="#" className="hover:text-yellow-100 transition">
-            Instagram
-          </a>
-          <a href="#" className="hover:text-yellow-100 transition">
-            Twitter
-          </a>
+      {/* FOOTER */}<footer className="bg-yellow-400 text-white py-10 mt-auto">
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        {/* LOGO + COPYRIGHT */}
+        <div>
+          <h2 className="text-2xl font-bold">CookMaster</h2>
+          <p className="mt-2">&copy; 2025 CookMaster. Tous droits réservés.</p>
         </div>
-      </footer>
+
+        {/* NAVIGATION RAPIDE */}
+        <div>
+          <h3 className="font-semibold mb-3">Navigation</h3>
+          <ul className="space-y-2">
+            <li><Link href="/" className="hover:underline">Accueil</Link></li>
+            <li><Link href="/recipes" className="hover:underline">Recettes</Link></li>
+            <li><Link href="/about" className="hover:underline">À propos</Link></li>
+            <li><Link href="/contact" className="hover:underline">Contact</Link></li>
+          </ul>
+        </div>
+
+        {/* CONTACT */}
+        <div>
+          <h3 className="font-semibold mb-3">Contact</h3>
+          <p className="flex items-center gap-2">
+            <Mail size={18} /> support@cookmaster.com
+          </p>
+          <p className="flex items-center gap-2 mt-2">
+            <Phone size={18} /> +33 6 12 34 56 78
+          </p>
+        </div>
+
+        {/* RÉSEAUX + NEWSLETTER */}
+        <div>
+          <h3 className="font-semibold mb-3">Suivez-nous</h3>
+          <div className="flex gap-4 mb-4">
+            <Link href="#" className="hover:opacity-80">
+              <FacebookIcon />
+            </Link>
+            <Link href="#" className="hover:opacity-80">
+              <InstagramIcon />
+            </Link>
+            <Link href="#" className="hover:opacity-80">
+              <X />
+            </Link>
+          </div>
+          <form className="flex flex-col gap-2">
+            <input
+              type="email"
+              placeholder="Votre email"
+              className="px-3 py-2 rounded text-gray-800"
+            />
+            <button
+              type="submit"
+              className="bg-white text-yellow-500 font-bold rounded py-2 hover:bg-yellow-100 transition"
+            >
+              S’abonner
+            </button>
+          </form>
+        </div>
+      </div>
+    </footer>
     </div>
   );
 }
