@@ -12,7 +12,6 @@ const ContactPage: React.FC = () => {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [emailNewsletter, setEmailNewsletter] = useState("");
 
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
 
