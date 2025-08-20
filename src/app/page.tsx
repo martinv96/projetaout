@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Mail, Phone, InstagramIcon, FacebookIcon, X, } from "lucide-react";
+import { Mail, Phone, InstagramIcon, FacebookIcon, X } from "lucide-react";
 
 const recipes = [
   {
@@ -111,16 +111,14 @@ function ImageSlider() {
   }, []);
 
   if (typeof window !== "undefined") {
-  const consoleError = console.error;
-  console.error = (...args) => {
-    if (/hydration/i.test(args[0])) return;
-    consoleError(...args);
-  };
-}
-
+    const consoleError = console.error;
+    console.error = (...args) => {
+      if (/hydration/i.test(args[0])) return;
+      consoleError(...args);
+    };
+  }
 
   return (
-    
     <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden rounded-xl mb-12">
       {recipes.map((recipe, i) => (
         <motion.div
@@ -152,6 +150,10 @@ function ImageSlider() {
 export default function Home() {
   const [startIndex, setStartIndex] = useState(0);
   const [fade, setFade] = useState(true);
+  const [emailNewsletter, setEmailNewsletter] = useState("");
+  const [newsletterMessage, setNewsletterMessage] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -180,7 +182,9 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="bg-yellow-400 text-white px-8 py-6 shadow-md flex justify-between items-center"
       >
-        <Link href="/" className="text-2xl font-bold">CookMaster</Link>
+        <Link href="/" className="text-2xl font-bold">
+          CookMaster
+        </Link>
         <nav className="space-x-4">
           <Link href="/" className="hover:text-yellow-100 transition">
             Accueil
@@ -193,7 +197,6 @@ export default function Home() {
           </Link>
         </nav>
       </motion.header>
-
       {/* HERO */}
       <motion.section
         initial={{ opacity: 0 }}
@@ -228,7 +231,6 @@ export default function Home() {
           </Link>
         </div>
       </motion.section>
-
       {/* COOKING TIPS */}
       <section className="px-8 py-16 bg-yellow-50">
         <div className="max-w-6xl mx-auto text-center">
@@ -253,7 +255,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* SLIDER */}
       <section
         className="relative py-16 bg-white overflow-hidden"
@@ -267,7 +268,6 @@ export default function Home() {
           <ImageSlider />
         </div>
       </section>
-
       {/* RECIPES */}
       <section id="recipes" className="px-8 py-16">
         <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">
@@ -306,104 +306,182 @@ export default function Home() {
           ))}
         </div>
       </section>
-
       {/* ABOUT SECTION */}
+      <section className="bg-gray-100 py-16 px-6 md:px-12 lg:px-24">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-3xl text-gray-500 font-bold mb-6">
+            À propos de <span className="text-red-500">CookMaster</span>
+          </h2>
+          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+            CookMaster est une plateforme dédiée aux passionnés de cuisine.
+            Notre objectif est de partager des recettes variées, simples et
+            gourmandes pour inspirer vos repas au quotidien. Que vous soyez
+            débutant ou chef confirmé, vous trouverez toujours une idée adaptée
+            à vos envies !
+          </p>
 
-    <section className="bg-gray-100 py-16 px-6 md:px-12 lg:px-24">
-      <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl text-gray-500 font-bold mb-6">À propos de <span className="text-red-500">CookMaster</span></h2>
-        <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-          CookMaster est une plateforme dédiée aux passionnés de cuisine. 
-          Notre objectif est de partager des recettes variées, simples 
-          et gourmandes pour inspirer vos repas au quotidien. 
-          Que vous soyez débutant ou chef confirmé, vous trouverez 
-          toujours une idée adaptée à vos envies !
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div className="bg-white shadow-md p-6 rounded-2xl">
+              <h3 className="text-xl text-gray-400 font-semibold mb-2">
+                💡 Inspiration
+              </h3>
+              <p className="text-gray-600">
+                Des recettes pour toutes les occasions et toutes les saisons.
+              </p>
+            </div>
+            <div className="bg-white text-gray-400 shadow-md p-6 rounded-2xl">
+              <h3 className="text-xl font-semibold mb-2">⏱️ Simplicité</h3>
+              <p className="text-gray-600">
+                Des plats rapides et faciles à préparer au quotidien.
+              </p>
+            </div>
+            <div className="bg-white text-gray-400 shadow-md p-6 rounded-2xl">
+              <h3 className="text-xl font-semibold mb-2">🌍 Partage</h3>
+              <p className="text-gray-600">
+                Une communauté qui échange et découvre de nouvelles saveurs.
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href="/recipes"
+            className="bg-red-500 text-white font-semibold px-6 py-3 rounded-xl shadow hover:bg-red-600 transition"
+          >
+            Découvrir nos recettes
+          </Link>
+        </div>
+      </section>
+      );
+      {/* QUIZ SECTION */}
+      <section className="px-8 py-16 bg-gray-50">
+        <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+          🍳 Quiz culinaire
+        </h3>
+        <p className="text-center text-gray-700 mb-6">
+          Testez vos connaissances sur la cuisine et découvrez si vous êtes un
+          vrai chef !
         </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          <div className="bg-white shadow-md p-6 rounded-2xl">
-            <h3 className="text-xl text-gray-400 font-semibold mb-2">💡 Inspiration</h3>
-            <p className="text-gray-600">Des recettes pour toutes les occasions et toutes les saisons.</p>
-          </div>
-          <div className="bg-white text-gray-400 shadow-md p-6 rounded-2xl">
-            <h3 className="text-xl font-semibold mb-2">⏱️ Simplicité</h3>
-            <p className="text-gray-600">Des plats rapides et faciles à préparer au quotidien.</p>
-          </div>
-          <div className="bg-white text-gray-400 shadow-md p-6 rounded-2xl">
-            <h3 className="text-xl font-semibold mb-2">🌍 Partage</h3>
-            <p className="text-gray-600">Une communauté qui échange et découvre de nouvelles saveurs.</p>
-          </div>
+        <div className="text-center">
+          <Link
+            href="/quiz"
+            className="bg-yellow-400 text-white px-6 py-3 rounded-full font-semibold hover:bg-yellow-500 transition"
+          >
+            Commencer le quiz
+          </Link>
         </div>
-
-        <Link href="/recipes" className="bg-red-500 text-white font-semibold px-6 py-3 rounded-xl shadow hover:bg-red-600 transition">
-          Découvrir nos recettes
-        </Link>
-      </div>
-    </section>
-  );
-
-
-      {/* FOOTER */}<footer className="bg-yellow-400 text-white py-10 mt-auto">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
-        
-        {/* LOGO + COPYRIGHT */}
-        <div>
-          <h2 className="text-2xl font-bold">CookMaster</h2>
-          <p className="mt-2">&copy; 2025 CookMaster. Tous droits réservés.</p>
-        </div>
-
-        {/* NAVIGATION RAPIDE */}
-        <div>
-          <h3 className="font-semibold mb-3">Navigation</h3>
-          <ul className="space-y-2">
-            <li><Link href="/" className="hover:underline">Accueil</Link></li>
-            <li><Link href="/recipes" className="hover:underline">Recettes</Link></li>
-            <li><Link href="/about" className="hover:underline">À propos</Link></li>
-            <li><Link href="/contact" className="hover:underline">Contact</Link></li>
-          </ul>
-        </div>
-
-        {/* CONTACT */}
-        <div>
-          <h3 className="font-semibold mb-3">Contact</h3>
-          <p className="flex items-center gap-2">
-            <Mail size={18} /> support@cookmaster.com
-          </p>
-          <p className="flex items-center gap-2 mt-2">
-            <Phone size={18} /> +33 6 12 34 56 78
-          </p>
-        </div>
-
-        {/* RÉSEAUX + NEWSLETTER */}
-        <div>
-          <h3 className="font-semibold mb-3">Suivez-nous</h3>
-          <div className="flex gap-4 mb-4">
-            <Link href="#" className="hover:opacity-80">
-              <FacebookIcon />
-            </Link>
-            <Link href="#" className="hover:opacity-80">
-              <InstagramIcon />
-            </Link>
-            <Link href="#" className="hover:opacity-80">
-              <X />
-            </Link>
+      </section>
+      {/* FOOTER */}
+      <footer className="bg-yellow-400 text-white py-10 mt-auto">
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* LOGO + COPYRIGHT */}
+          <div>
+            <h2 className="text-2xl font-bold">CookMaster</h2>
+            <p className="mt-2">
+              &copy; 2025 CookMaster. Tous droits réservés.
+            </p>
           </div>
-          <form className="flex flex-col gap-2">
-            <input
-              type="email"
-              placeholder="Votre email"
-              className="px-3 py-2 rounded text-gray-800"
-            />
-            <button
-              type="submit"
-              className="bg-white text-yellow-500 font-bold rounded py-2 hover:bg-yellow-100 transition"
+
+          {/* NAVIGATION RAPIDE */}
+          <div>
+            <h3 className="font-semibold mb-3">Navigation</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/" className="hover:underline">
+                  Accueil
+                </Link>
+              </li>
+              <li>
+                <Link href="/recipes" className="hover:underline">
+                  Recettes
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:underline">
+                  À propos
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:underline">
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* CONTACT */}
+          <div>
+            <h3 className="font-semibold mb-3">Contact</h3>
+            <p className="flex items-center gap-2">
+              <Mail size={18} /> support@cookmaster.com
+            </p>
+            <p className="flex items-center gap-2 mt-2">
+              <Phone size={18} /> +33 6 12 34 56 78
+            </p>
+          </div>
+
+          {/* RÉSEAUX + NEWSLETTER */}
+          <div>
+            <h3 className="font-semibold mb-3">Suivez-nous</h3>
+            <div className="flex gap-4 mb-4">
+              <Link href="#" className="hover:opacity-80">
+                <FacebookIcon />
+              </Link>
+              <Link href="#" className="hover:opacity-80">
+                <InstagramIcon />
+              </Link>
+              <Link href="#" className="hover:opacity-80">
+                <X />
+              </Link>
+            </div>
+            <form
+              className="flex flex-col gap-2"
+              onSubmit={async (e) => {
+                e.preventDefault();
+
+                if (!emailNewsletter) return;
+
+                try {
+                  const res = await fetch("/api/subscribe", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email: emailNewsletter }),
+                  });
+
+                  if (res.ok) {
+                    setNewsletterMessage("Merci pour votre inscription !");
+                    setEmailNewsletter("");
+                  } else {
+                    setNewsletterMessage("Une erreur est survenue, réessayez.");
+                  }
+                } catch (err) {
+                  console.error(err);
+                  setNewsletterMessage("Erreur lors de l'inscription.");
+                }
+              }}
             >
-              S’abonner
-            </button>
-          </form>
+              <input
+                type="email"
+                placeholder="Votre email"
+                className="px-3 py-2 rounded text-gray-800"
+                value={emailNewsletter}
+                onChange={(e) => setEmailNewsletter(e.target.value)}
+                required
+              />
+              <button
+                type="submit"
+                className="bg-white text-yellow-500 font-bold rounded py-2 hover:bg-yellow-100 transition"
+              >
+                S’abonner
+              </button>
+              {newsletterMessage && (
+                <p className="text-sm mt-2 font-semibold text-green-600">
+                  {newsletterMessage}
+                </p>
+              )}
+            </form>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
     </div>
   );
 }

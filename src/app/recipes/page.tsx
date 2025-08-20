@@ -2,11 +2,39 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import recipes from "../../data/recipes";
 import recipesViande from "../../data/viandes";
-import { Mail, Phone, InstagramIcon, FacebookIcon, X, } from "lucide-react";
+import { Mail, Phone, InstagramIcon, FacebookIcon, X } from "lucide-react";
 
 export default function RecipesPage() {
+  const [emailNewsletter, setEmailNewsletter] = useState("");
+  const [newsletterMessage, setNewsletterMessage] = useState<string | null>(null);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!emailNewsletter) return;
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: emailNewsletter }),
+      });
+
+      if (res.ok) {
+        setNewsletterMessage("Merci pour votre inscription !");
+        setEmailNewsletter("");
+      } else {
+        setNewsletterMessage("Une erreur est survenue, réessayez.");
+      }
+    } catch (err) {
+      console.error(err);
+      setNewsletterMessage("Erreur lors de l'inscription.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-yellow-50 font-sans">
       {/* HEADER */}
@@ -129,67 +157,75 @@ export default function RecipesPage() {
         </div>
       </section>
 
-      {/* FOOTER */}<footer className="bg-yellow-400 text-white py-10 mt-auto">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
-        
-        {/* LOGO + COPYRIGHT */}
-        <div>
-          <h2 className="text-2xl font-bold">CookMaster</h2>
-          <p className="mt-2">&copy; 2025 CookMaster. Tous droits réservés.</p>
-        </div>
-
-        {/* NAVIGATION RAPIDE */}
-        <div>
-          <h3 className="font-semibold mb-3">Navigation</h3>
-          <ul className="space-y-2">
-            <li><Link href="/" className="hover:underline">Accueil</Link></li>
-            <li><Link href="/recipes" className="hover:underline">Recettes</Link></li>
-            <li><Link href="/about" className="hover:underline">À propos</Link></li>
-            <li><Link href="/contact" className="hover:underline">Contact</Link></li>
-          </ul>
-        </div>
-
-        {/* CONTACT */}
-        <div>
-          <h3 className="font-semibold mb-3">Contact</h3>
-          <p className="flex items-center gap-2">
-            <Mail size={18} /> support@cookmaster.com
-          </p>
-          <p className="flex items-center gap-2 mt-2">
-            <Phone size={18} /> +33 6 12 34 56 78
-          </p>
-        </div>
-
-        {/* RÉSEAUX + NEWSLETTER */}
-        <div>
-          <h3 className="font-semibold mb-3">Suivez-nous</h3>
-          <div className="flex gap-4 mb-4">
-            <Link href="#" className="hover:opacity-80">
-              <FacebookIcon />
-            </Link>
-            <Link href="#" className="hover:opacity-80">
-              <InstagramIcon />
-            </Link>
-            <Link href="#" className="hover:opacity-80">
-              <X />
-            </Link>
+      {/* FOOTER */}
+      <footer className="bg-yellow-400 text-white py-10 mt-auto">
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* LOGO + COPYRIGHT */}
+          <div>
+            <h2 className="text-2xl font-bold">CookMaster</h2>
+            <p className="mt-2">&copy; 2025 CookMaster. Tous droits réservés.</p>
           </div>
-          <form className="flex flex-col gap-2">
-            <input
-              type="email"
-              placeholder="Votre email"
-              className="px-3 py-2 rounded text-gray-800"
-            />
-            <button
-              type="submit"
-              className="bg-white text-yellow-500 font-bold rounded py-2 hover:bg-yellow-100 transition"
-            >
-              S’abonner
-            </button>
-          </form>
+
+          {/* NAVIGATION RAPIDE */}
+          <div>
+            <h3 className="font-semibold mb-3">Navigation</h3>
+            <ul className="space-y-2">
+              <li><Link href="/" className="hover:underline">Accueil</Link></li>
+              <li><Link href="/recipes" className="hover:underline">Recettes</Link></li>
+              <li><Link href="/about" className="hover:underline">À propos</Link></li>
+              <li><Link href="/contact" className="hover:underline">Contact</Link></li>
+            </ul>
+          </div>
+
+          {/* CONTACT */}
+          <div>
+            <h3 className="font-semibold mb-3">Contact</h3>
+            <p className="flex items-center gap-2">
+              <Mail size={18} /> support@cookmaster.com
+            </p>
+            <p className="flex items-center gap-2 mt-2">
+              <Phone size={18} /> +33 6 12 34 56 78
+            </p>
+          </div>
+
+          {/* RÉSEAUX + NEWSLETTER */}
+          <div>
+            <h3 className="font-semibold mb-3">Suivez-nous</h3>
+            <div className="flex gap-4 mb-4">
+              <Link href="#" className="hover:opacity-80">
+                <FacebookIcon />
+              </Link>
+              <Link href="#" className="hover:opacity-80">
+                <InstagramIcon />
+              </Link>
+              <Link href="#" className="hover:opacity-80">
+                <X />
+              </Link>
+            </div>
+            <form className="flex flex-col gap-2" onSubmit={handleNewsletterSubmit}>
+              <input
+                type="email"
+                placeholder="Votre email"
+                className="px-3 py-2 rounded text-gray-800"
+                value={emailNewsletter}
+                onChange={(e) => setEmailNewsletter(e.target.value)}
+                required
+              />
+              <button
+                type="submit"
+                className="bg-white text-yellow-500 font-bold rounded py-2 hover:bg-yellow-100 transition"
+              >
+                S’abonner
+              </button>
+              {newsletterMessage && (
+                <p className="text-sm mt-2 font-semibold text-green-600">
+                  {newsletterMessage}
+                </p>
+              )}
+            </form>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
     </div>
   );
 }
