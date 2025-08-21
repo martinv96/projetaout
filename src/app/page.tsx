@@ -99,6 +99,14 @@ const tips = [
   // Ajoute autant de tips que tu veux
 ];
 
+const quotes = [
+  "La cuisine est l'art de transformer des ingrédients simples en moments extraordinaires.",
+  "Un bon repas réunit les cœurs.",
+  "Cuisiner, c'est aimer donner.",
+];
+
+const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
 // --- SLIDER ---
 function ImageSlider() {
   const [index, setIndex] = useState(0);
@@ -231,8 +239,20 @@ export default function Home() {
           </Link>
         </div>
       </motion.section>
+      {/* QUOTE SECTION */}
+      <section className="mt-5 mb-5 px-8 py-16 bg-yellow-100 text-center shadow-md rounded-lg mx-4 md:mx-auto max-w-4xl">
+        <h3 className="text-4xl font-bold text-gray-800 mb-6">
+          ✨ Inspiration du jour
+        </h3>
+        <p className="text-xl italic text-gray-700">
+          &quot;{randomQuote}&quot;
+        </p>
+        <div className="mt-6">
+          <span className="block text-gray-500 font-medium">- CookMaster</span>
+        </div>
+      </section>
       {/* COOKING TIPS */}
-      <section className="px-8 py-16 bg-yellow-50">
+      <section className="px-8 py-16 bg-yellow-50 border-t border-orange-100 !important">
         <div className="max-w-6xl mx-auto text-center">
           <h3 className="text-3xl md:text-4xl font-bold text-gray-800 mb-10">
             🧑‍🍳 Astuces de cuisine
@@ -351,7 +371,6 @@ export default function Home() {
           </Link>
         </div>
       </section>
-      );
       {/* QUIZ SECTION */}
       <section className="px-8 py-16 bg-gray-50">
         <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -48,6 +48,24 @@ export default function QuizPage() {
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
+  const [timeLeft, setTimeLeft] = useState(10);
+
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000); // Décrémente chaque seconde
+      return () => clearTimeout(timer); // Nettoie le timer à chaque re-render
+    } else {
+      // Si le temps est écoulé, passe automatiquement à la question suivante
+      const nextQuestion = currentQuestion + 1;
+      if (nextQuestion < questions.length) {
+        setCurrentQuestion(nextQuestion);
+        setSelectedAnswers((prev) => [...prev, ""]); // Enregistre une réponse vide
+        setTimeLeft(10); // Réinitialise le temps pour la prochaine question
+      } else {
+        setShowScore(true); // Affiche le score si c'était la dernière question
+      }
+    }
+  }, [timeLeft, currentQuestion]);
 
   const handleAnswer = (selectedOption: string) => {
     setSelectedAnswers((prev) => [...prev, selectedOption]);
@@ -58,7 +76,10 @@ export default function QuizPage() {
 
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
-      setTimeout(() => setCurrentQuestion(nextQuestion), 500); // Animation avant de passer à la question suivante
+      setTimeout(() => {
+        setCurrentQuestion(nextQuestion);
+        setTimeLeft(10); // Réinitialise le chrono pour la prochaine question
+      }, 500); // Animation avant de passer à la question suivante
     } else {
       setTimeout(() => setShowScore(true), 500);
     }
@@ -69,6 +90,7 @@ export default function QuizPage() {
     setScore(0);
     setShowScore(false);
     setSelectedAnswers([]);
+    setTimeLeft(10); // Réinitialise le temps
   };
 
   return (
@@ -162,6 +184,15 @@ export default function QuizPage() {
             </div>
           ) : (
             <div>
+              {/* Chrono placé ici */}
+              <div className="flex justify-center items-center mb-6">
+                <div className="bg-yellow-400 text-white px-6 py-3 rounded-full shadow-md flex items-center gap-4">
+                  <span className="text-lg font-semibold">
+                    ⏱️ Temps restant :
+                  </span>
+                  <span className="text-2xl font-bold">{timeLeft}s</span>
+                </div>
+              </div>
               <p className="text-lg font-medium text-gray-700 mb-4">
                 Question {currentQuestion + 1} sur {questions.length}
               </p>
@@ -223,11 +254,14 @@ export default function QuizPage() {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="absolute top-1/4 right-8 hidden lg:block"
+          className="absolute top-1/4 right-4 hidden lg:block"
         >
-          <blockquote className="bg-yellow-100 p-4 rounded-lg shadow-md text-gray-700 italic">
-            &quot;La cuisine est l&apos;art de transformer des ingrédients
-            simples en moments extraordinaires.&quot;
+          <blockquote className="bg-yellow-100 p-6 rounded-lg shadow-md text-gray-700 italic text-right max-w-xs">
+            &quot;La cuisine est l&apos;art de transformer
+            <br />
+            des ingrédients simples en moments
+            <br />
+            extraordinaires.&quot;
           </blockquote>
         </motion.div>
       </section>

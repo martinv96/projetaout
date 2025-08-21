@@ -1,4 +1,3 @@
-// data/recipes.ts
 const recipes = [
   {
     id: "1",
@@ -13,7 +12,11 @@ const recipes = [
       { text: "Disposer les pommes sur la pâte.", image: "/steps/tarte/step4.jpg" },
       { text: "Saupoudrer de sucre et de cannelle, ajouter des morceaux de beurre.", image: "/steps/tarte/step5.jpg" },
       { text: "Cuire 35 minutes jusqu'à ce que la tarte soit dorée.", image: "/steps/tarte/step6.jpg" },
-    ]
+    ],
+    tips: [
+      "Utilisez des pommes acidulées pour un meilleur équilibre des saveurs.",
+      "Ajoutez une pincée de vanille pour rehausser le goût.",
+    ],
   },
   {
     id: "2",
@@ -28,7 +31,11 @@ const recipes = [
       { text: "Égoutter les pâtes et les mélanger avec la pancetta.", image: "/steps/carbonara/step4.jpg" },
       { text: "Ajouter le mélange œufs-parmesan hors du feu et mélanger rapidement.", image: "/steps/carbonara/step5.jpg" },
       { text: "Poivrer selon le goût et servir immédiatement.", image: "/steps/carbonara/step6.jpg" },
-    ]
+    ],
+    tips: [
+      "Ne pas ajouter de crème fraîche, ce n'est pas traditionnel !",
+      "Servez immédiatement pour éviter que les pâtes ne collent.",
+    ],
   },
   {
     id: "3",
@@ -42,7 +49,11 @@ const recipes = [
       { text: "Ajouter la feta émiettée et les olives.", image: "/steps/salade/step3.jpg" },
       { text: "Assaisonner avec la vinaigrette au citron.", image: "/steps/salade/step4.jpg" },
       { text: "Mélanger délicatement et servir frais.", image: "/steps/salade/step5.jpg" },
-    ]
+    ],
+    tips: [
+      "Ajoutez des graines de tournesol pour un croquant supplémentaire.",
+      "Utilisez des légumes bien frais pour un goût optimal.",
+    ],
   },
   {
     id: "4",
@@ -56,7 +67,11 @@ const recipes = [
       { text: "Placer le poulet dans un plat et enfourner 1h à 1h15 selon le poids.", image: "/steps/poulet/step3.jpg" },
       { text: "Arroser régulièrement avec le jus de cuisson.", image: "/steps/poulet/step4.jpg" },
       { text: "Laisser reposer 10 minutes avant de découper et servir.", image: "/steps/poulet/step5.jpg" },
-    ]
+    ],
+    tips: [
+      "Laissez le poulet reposer après cuisson pour qu'il reste juteux.",
+      "Ajoutez des légumes dans le plat pour un accompagnement savoureux.",
+    ],
   },
   {
     id: "5",
@@ -71,7 +86,11 @@ const recipes = [
       { text: "Incorporer la farine et mélanger doucement.", image: "/steps/brownies/step4.jpg" },
       { text: "Verser dans un moule beurré et enfourner 20-25 minutes.", image: "/steps/brownies/step5.jpg" },
       { text: "Laisser refroidir avant de découper en carrés.", image: "/steps/brownies/step6.jpg" },
-    ]
+    ],
+    tips: [
+      "Ajoutez des noix ou des pépites de chocolat pour plus de gourmandise.",
+      "Ne cuisez pas trop longtemps pour garder les brownies fondants.",
+    ],
   },
 ];
 

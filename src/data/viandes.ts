@@ -11,7 +11,7 @@ const recipesViande = [
       "1 bouteille de vin rouge",
       "2 carottes",
       "2 oignons",
-      "Thym, laurier, sel, poivre"
+      "Thym, laurier, sel, poivre",
     ],
     steps: [
       { text: "Couper la viande en morceaux et les faire revenir.", image: "/steps/boeuf/step1.jpg" },
@@ -19,7 +19,11 @@ const recipesViande = [
       { text: "Verser le vin rouge et ajouter les herbes.", image: "/steps/boeuf/step3.jpg" },
       { text: "Laisser mijoter à feu doux pendant 2 à 3 heures.", image: "/steps/boeuf/step4.jpg" },
       { text: "Rectifier l’assaisonnement et servir chaud.", image: "/steps/boeuf/step5.jpg" },
-    ]
+    ],
+    tips: [
+      "Utilisez un vin rouge de qualité pour un meilleur goût.",
+      "Préparez le plat la veille pour que les saveurs se développent.",
+    ],
   },
   {
     id: "v2",
@@ -30,14 +34,18 @@ const recipesViande = [
       "6 côtelettes d’agneau",
       "2 gousses d’ail",
       "2 c. à soupe d’huile d’olive",
-      "Romarin, sel, poivre"
+      "Romarin, sel, poivre",
     ],
     steps: [
       { text: "Badigeonner les côtelettes d’huile d’olive, ail et romarin.", image: "/steps/agneau/step1.jpg" },
       { text: "Chauffer une poêle ou un grill bien chaud.", image: "/steps/agneau/step2.jpg" },
       { text: "Faire griller les côtelettes 3-4 minutes de chaque côté.", image: "/steps/agneau/step3.jpg" },
       { text: "Assaisonner et servir avec une salade ou légumes grillés.", image: "/steps/agneau/step4.jpg" },
-    ]
+    ],
+    tips: [
+      "Laissez mariner les côtelettes au moins 30 minutes avant cuisson.",
+      "Servez avec une sauce au yaourt et à la menthe pour plus de fraîcheur.",
+    ],
   },
   {
     id: "v3",
@@ -50,7 +58,7 @@ const recipesViande = [
       "1 poivron rouge",
       "2 tomates",
       "1 oignon",
-      "Épices chili, cumin"
+      "Épices chili, cumin",
     ],
     steps: [
       { text: "Faire revenir l’oignon et le poivron.", image: "/steps/chili/step1.jpg" },
@@ -58,7 +66,11 @@ const recipesViande = [
       { text: "Incorporer les tomates et les haricots rouges.", image: "/steps/chili/step3.jpg" },
       { text: "Ajouter les épices et laisser mijoter 30 minutes.", image: "/steps/chili/step4.jpg" },
       { text: "Servir chaud avec du riz ou des tortillas.", image: "/steps/chili/step5.jpg" },
-    ]
+    ],
+    tips: [
+      "Ajoutez un carré de chocolat noir pour adoucir le goût.",
+      "Servez avec de la crème fraîche pour équilibrer les épices.",
+    ],
   },
   {
     id: "v4",
@@ -69,14 +81,18 @@ const recipesViande = [
       "1 filet mignon de porc",
       "2 c. à soupe de moutarde",
       "20 cl de crème fraîche",
-      "Sel, poivre"
+      "Sel, poivre",
     ],
     steps: [
       { text: "Faire revenir le filet mignon dans une poêle.", image: "/steps/filet/step1.jpg" },
       { text: "Ajouter la moutarde et laisser caraméliser légèrement.", image: "/steps/filet/step2.jpg" },
       { text: "Verser la crème et laisser mijoter 20 minutes.", image: "/steps/filet/step3.jpg" },
       { text: "Rectifier l’assaisonnement et servir avec du riz.", image: "/steps/filet/step4.jpg" },
-    ]
+    ],
+    tips: [
+      "Ajoutez une cuillère de miel pour une touche sucrée.",
+      "Servez avec des légumes vapeur pour un repas équilibré.",
+    ],
   },
   {
     id: "v5",
@@ -88,7 +104,7 @@ const recipesViande = [
       "2 oignons",
       "200 ml de lait de coco",
       "2 c. à soupe de pâte de curry",
-      "Coriandre fraîche"
+      "Coriandre fraîche",
     ],
     steps: [
       { text: "Faire revenir les oignons hachés.", image: "/steps/curry/step1.jpg" },
@@ -96,7 +112,11 @@ const recipesViande = [
       { text: "Incorporer la pâte de curry et bien mélanger.", image: "/steps/curry/step3.jpg" },
       { text: "Verser le lait de coco et laisser mijoter 25 minutes.", image: "/steps/curry/step4.jpg" },
       { text: "Parsemer de coriandre fraîche avant de servir.", image: "/steps/curry/step5.jpg" },
-    ]
+    ],
+    tips: [
+      "Ajoutez des légumes comme des courgettes ou des carottes pour plus de saveur.",
+      "Servez avec du riz basmati pour un repas complet.",
+    ],
   },
   {
     id: "v6",
@@ -109,7 +129,7 @@ const recipesViande = [
       "50 g de chapelure",
       "1 boîte de tomates concassées",
       "1 oignon",
-      "Herbes italiennes"
+      "Herbes italiennes",
     ],
     steps: [
       { text: "Mélanger la viande avec l’œuf et la chapelure.", image: "/steps/boulettes/step1.jpg" },
@@ -117,7 +137,11 @@ const recipesViande = [
       { text: "Préparer une sauce tomate avec oignon et herbes.", image: "/steps/boulettes/step3.jpg" },
       { text: "Ajouter les boulettes dans la sauce et cuire 20 minutes.", image: "/steps/boulettes/step4.jpg" },
       { text: "Servir avec des pâtes ou du riz.", image: "/steps/boulettes/step5.jpg" },
-    ]
+    ],
+    tips: [
+      "Ajoutez du parmesan râpé pour plus de saveur.",
+      "Servez avec des pâtes fraîches pour un plat encore plus gourmand.",
+    ],
   },
 ];
 
