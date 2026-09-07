@@ -48,8 +48,8 @@ export default function ViandePage() {
           </h1>
 
           {/* SECTION INGRÉDIENTS */}
-          <h2 className="text-2xl font-semibold mb-4 text-gray-500">Ingrédients</h2>
-          <ul className="list-disc list-inside mb-8 text-gray-700">
+          <h2 className="text-2xl font-semibold mt-8 mb-6 text-gray-500">Ingrédients</h2>
+          <ul className="list-disc list-inside mb-12 text-gray-700">
             {viande.ingredients.map((ingredient, index) => (
               <li key={index} className="text-lg">
                 {ingredient}
@@ -58,7 +58,7 @@ export default function ViandePage() {
           </ul>
 
           {/* SLIDER DES ÉTAPES */}
-          <h2 className="text-2xl font-semibold mb-4 text-gray-500">Étapes</h2>
+          <h2 className="text-2xl font-semibold mt-12 mb-6 text-gray-500">Étapes</h2>
           <div className="relative w-full h-[400px] flex flex-col items-center">
             {/* Barre de progression */}
             <div className="w-full bg-gray-200 h-2 rounded-full mb-4">
@@ -111,7 +111,7 @@ export default function ViandePage() {
           </div>
 
           {/* CONSEILS POUR LA RECETTE */}
-          <h2 className="text-2xl font-semibold mt-10 mb-4 text-gray-500">
+          <h2 className="text-2xl font-semibold mt-16 mb-6 text-gray-500">
             Conseils pour cette recette
           </h2>
           <ul className="list-disc list-inside text-gray-700">
@@ -124,13 +124,13 @@ export default function ViandePage() {
 
           <Link
             href="/recipes"
-            className="mt-10 inline-block bg-yellow-400 text-white px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition shadow-md"
+            className="mt-12 inline-block bg-yellow-400 text-white px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition shadow-md"
           >
             Retour aux viandes
           </Link>
         </motion.div>
       </div>
-      <section className="bg-white py-12 shadow-inner">
+      <section className="bg-white py-16 shadow-inner mt-8">
   <div className="max-w-6xl mx-auto px-6">
     <h3 className="text-2xl font-bold text-gray-700 mb-6">
       Tu pourrais aussi aimer 🍖

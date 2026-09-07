@@ -1,13 +1,22 @@
 // app/api/subscribe/route.js
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 export async function POST(req) {
   const { email } = await req.json();
 
   if (!email) {
     return new Response(JSON.stringify({ error: "Email requis" }), { status: 400 });
+  }
+
+  if (!resend) {
+    return new Response(
+      JSON.stringify({ error: "Service d'email non configuré. Ajoute RESEND_API_KEY." }),
+      { status: 503 }
+    );
   }
 
   try {

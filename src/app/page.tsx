@@ -140,6 +140,7 @@ function ImageSlider() {
             src={recipe.image}
             alt={recipe.title}
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
             priority
           />
@@ -188,12 +189,12 @@ export default function Home() {
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="bg-yellow-400 text-white px-8 py-6 shadow-md flex justify-between items-center"
+        className="bg-yellow-400 text-white px-4 py-4 shadow-md flex flex-col gap-3 md:px-8 md:py-6 md:flex-row md:justify-between md:items-center"
       >
-        <Link href="/" className="text-2xl font-bold">
+        <Link href="/" className="text-xl font-bold md:text-2xl">
           CookMaster
         </Link>
-        <nav className="space-x-4">
+        <nav className="flex flex-wrap items-center justify-center gap-3 text-sm md:gap-4 md:text-base">
           <Link href="/" className="hover:text-yellow-100 transition">
             Accueil
           </Link>
@@ -210,41 +211,42 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="relative w-full h-screen flex items-center justify-center bg-gray-900"
+        className="relative w-full min-h-[420px] h-[72vh] md:h-screen flex items-center justify-center bg-gray-900"
       >
         {/* Background image */}
         <Image
           src="/hero-food.jpg"
           alt="Recette"
           fill
+          sizes="100vw"
           className="object-cover brightness-75"
           priority
         />
 
         {/* Texte centré */}
-        <div className="relative text-center px-6 md:px-12 max-w-2xl">
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6">
+        <div className="relative z-10 text-center px-4 sm:px-6 md:px-12 max-w-xl md:max-w-2xl">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-4 md:mb-6 leading-tight">
             Découvrez des recettes{" "}
             <span className="text-yellow-400">faciles à préparer</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-200 mb-8">
+          <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 md:mb-8">
             Explorez notre collection pour tous les goûts. Que vous soyez
             débutant ou chef expérimenté, trouvez l’inspiration pour vos repas !
           </p>
           <Link
             href="/recipes"
-            className="inline-block bg-yellow-400 text-gray-900 px-8 py-4 rounded-full font-bold hover:bg-yellow-500 transition transform hover:scale-105"
+            className="inline-block bg-yellow-400 text-gray-900 px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base rounded-full font-bold hover:bg-yellow-500 transition transform hover:scale-105"
           >
             Voir les recettes
           </Link>
         </div>
       </motion.section>
       {/* QUOTE SECTION */}
-      <section className="mt-5 mb-5 px-8 py-16 bg-yellow-100 text-center shadow-md rounded-lg mx-4 md:mx-auto max-w-4xl">
-        <h3 className="text-4xl font-bold text-gray-800 mb-6">
+      <section className="mt-5 mb-5 px-4 py-10 bg-yellow-100 text-center shadow-md rounded-lg mx-3 md:px-8 md:py-16 md:mx-auto max-w-4xl">
+        <h3 className="text-2xl md:text-4xl font-bold text-gray-800 mb-4 md:mb-6">
           ✨ Inspiration du jour
         </h3>
-        <p className="text-xl italic text-gray-700">
+        <p className="text-lg italic text-gray-700 md:text-xl">
           &quot;{randomQuote}&quot;
         </p>
         <div className="mt-6">
@@ -252,24 +254,24 @@ export default function Home() {
         </div>
       </section>
       {/* COOKING TIPS */}
-      <section className="px-8 py-16 bg-yellow-50 border-t border-orange-100 !important">
+      <section className="px-4 py-10 bg-yellow-50 border-t border-orange-100 md:px-8 md:py-16">
         <div className="max-w-6xl mx-auto text-center">
-          <h3 className="text-3xl md:text-4xl font-bold text-gray-800 mb-10">
+          <h3 className="text-2xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-10">
             🧑‍🍳 Astuces de cuisine
           </h3>
 
           <div
-            className={`grid md:grid-cols-3 gap-8 transition-opacity duration-500 ${
+            className={`grid gap-4 md:grid-cols-3 md:gap-8 transition-opacity duration-500 ${
               fade ? "opacity-100" : "opacity-0"
             }`}
           >
             {visibleTips.map((tip, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition h-40 flex flex-col justify-between"
+                className="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition min-h-[170px] flex flex-col justify-between md:p-6 md:h-40"
               >
-                <h4 className="text-xl font-semibold mb-2">{tip.title}</h4>
-                <p className="text-gray-600 overflow-y-auto">{tip.text}</p>
+                <h4 className="text-lg font-semibold mb-2 md:text-xl">{tip.title}</h4>
+                <p className="text-sm text-gray-600 md:text-base overflow-y-auto">{tip.text}</p>
               </div>
             ))}
           </div>
@@ -277,23 +279,22 @@ export default function Home() {
       </section>
       {/* SLIDER */}
       <section
-        className="relative py-16 bg-white overflow-hidden"
+        className="relative py-8 bg-white overflow-hidden md:py-16"
         style={{
           backgroundImage: "url('/grain.jpg')",
-
-          backgroundSize: "auto", // taille naturelle des grains
+          backgroundSize: "auto",
         }}
       >
-        <div className="relative max-w-7xl mx-auto px-4">
+        <div className="relative max-w-7xl mx-auto px-3 md:px-4">
           <ImageSlider />
         </div>
       </section>
       {/* RECIPES */}
-      <section id="recipes" className="px-8 py-16">
-        <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+      <section id="recipes" className="px-4 py-10 md:px-8 md:py-16">
+        <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 md:mb-8 text-center">
           Nos recettes populaires
         </h3>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid gap-6 md:grid-cols-3 md:gap-8">
           {recipes.map((recipe, index) => (
             <motion.div
               key={index}
@@ -303,11 +304,12 @@ export default function Home() {
               transition={{ delay: index * 0.2, duration: 0.6 }}
               className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transform hover:scale-105 transition"
             >
-              <div className="relative w-full h-64">
+              <div className="relative w-full h-56 md:h-64">
                 <Image
                   src={recipe.image}
                   alt={recipe.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover"
                   priority
                 />
@@ -327,12 +329,12 @@ export default function Home() {
         </div>
       </section>
       {/* ABOUT SECTION */}
-      <section className="bg-gray-100 py-16 px-6 md:px-12 lg:px-24">
+      <section className="bg-gray-100 py-10 px-4 md:py-16 md:px-12 lg:px-24">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl text-gray-500 font-bold mb-6">
+          <h2 className="text-2xl md:text-3xl text-gray-500 font-bold mb-4 md:mb-6">
             À propos de <span className="text-red-500">CookMaster</span>
           </h2>
-          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+          <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
             CookMaster est une plateforme dédiée aux passionnés de cuisine.
             Notre objectif est de partager des recettes variées, simples et
             gourmandes pour inspirer vos repas au quotidien. Que vous soyez
@@ -340,7 +342,7 @@ export default function Home() {
             à vos envies !
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6 mb-8 md:mb-10">
             <div className="bg-white shadow-md p-6 rounded-2xl">
               <h3 className="text-xl text-gray-400 font-semibold mb-2">
                 💡 Inspiration
@@ -372,26 +374,26 @@ export default function Home() {
         </div>
       </section>
       {/* QUIZ SECTION */}
-      <section className="px-8 py-16 bg-gray-50">
-        <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+      <section className="px-4 py-10 bg-gray-50 md:px-8 md:py-16">
+        <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 md:mb-8 text-center">
           🍳 Quiz culinaire
         </h3>
-        <p className="text-center text-gray-700 mb-6">
+        <p className="text-center text-sm text-gray-700 mb-6 md:text-base">
           Testez vos connaissances sur la cuisine et découvrez si vous êtes un
           vrai chef !
         </p>
         <div className="text-center">
           <Link
             href="/quiz"
-            className="bg-yellow-400 text-white px-6 py-3 rounded-full font-semibold hover:bg-yellow-500 transition"
+            className="inline-block bg-yellow-400 text-white px-6 py-3 rounded-full font-semibold hover:bg-yellow-500 transition"
           >
             Commencer le quiz
           </Link>
         </div>
       </section>
       {/* FOOTER */}
-      <footer className="bg-yellow-400 text-white py-10 mt-auto">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <footer className="bg-yellow-400 text-white py-8 mt-auto md:py-10">
+        <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4 md:px-6 md:gap-8">
           {/* LOGO + COPYRIGHT */}
           <div>
             <h2 className="text-2xl font-bold">CookMaster</h2>
