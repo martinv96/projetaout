@@ -4,6 +4,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Mail, Phone, InstagramIcon, FacebookIcon, X } from "lucide-react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const questions = [
   {
@@ -95,28 +97,7 @@ export default function QuizPage() {
 
   return (
     <div className="min-h-screen bg-yellow-50 font-sans flex flex-col">
-      {/* HEADER */}
-      <motion.header
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="bg-yellow-400 text-white px-8 py-6 shadow-md flex justify-between items-center"
-      >
-        <Link href="/" className="text-2xl font-bold">
-          CookMaster
-        </Link>
-        <nav className="space-x-4">
-          <Link href="/" className="hover:text-yellow-100 transition">
-            Accueil
-          </Link>
-          <Link href="/recipes" className="hover:text-yellow-100 transition">
-            Recettes
-          </Link>
-          <Link href="/contact" className="hover:text-yellow-100 transition">
-            Contact
-          </Link>
-        </nav>
-      </motion.header>
+      <Header />
 
       {/* QUIZ SECTION */}
       <section className="px-8 py-16 flex-grow relative">
@@ -266,7 +247,8 @@ export default function QuizPage() {
         </motion.div>
       </section>
 
-      {/* FOOTER */}
+      <Footer />
+      {false && (
       <footer className="bg-yellow-400 text-white py-10 mt-auto">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* LOGO + COPYRIGHT */}
@@ -345,6 +327,7 @@ export default function QuizPage() {
           </div>
         </div>
       </footer>
+      )}
     </div>
   );
 }

@@ -5,7 +5,8 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import recipes from "../../../data/recipes";
-import { Mail, Phone, InstagramIcon, FacebookIcon, X } from "lucide-react";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 export default function RecipePage() {
   const pathname = usePathname();
@@ -25,17 +26,7 @@ export default function RecipePage() {
 
   return (
     <div className="min-h-screen bg-yellow-50 font-sans flex flex-col">
-      {/* HEADER */}
-      <header className="bg-yellow-400 text-white px-8 py-6 shadow-md flex justify-between items-center sticky top-0 z-50">
-        <Link href="/" className="text-2xl font-bold">
-          CookMaster
-        </Link>
-        <nav className="space-x-4 font-medium">
-          <Link href="/">Accueil</Link>
-          <Link href="/recipes">Recettes</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
-      </header>
+      <Header />
 
       {/* CONTENU PRINCIPAL */}
       <div className="px-4 py-16 max-w-4xl mx-auto w-full flex-grow">
@@ -60,7 +51,7 @@ export default function RecipePage() {
 
           {/* SLIDER DES ÉTAPES */}
           <h2 className="text-2xl font-semibold mb-4 text-gray-500">Étapes</h2>
-          <div className="relative w-full h-[400px] flex flex-col items-center">
+          <div className="relative flex h-[460px] w-full flex-col items-center">
             {/* Barre de progression */}
             <div className="w-full bg-gray-200 h-2 rounded-full mb-4">
   <div
@@ -78,7 +69,7 @@ export default function RecipePage() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ duration: 0.5 }}
-                className="w-full h-full flex flex-col items-center"
+                className="flex h-full w-full flex-col items-center"
               >
                 <div className="relative w-full h-72 rounded-xl overflow-hidden shadow-lg mb-4">
                   <Image
@@ -88,14 +79,14 @@ export default function RecipePage() {
                     className="object-cover"
                   />
                 </div>
-                <p className="text-lg text-gray-800 font-medium text-center">
+                <p className="flex h-16 w-full items-center justify-center text-center text-lg font-medium text-gray-800">
                   Étape {stepIndex + 1}: {steps[stepIndex].text}
                 </p>
               </motion.div>
             </AnimatePresence>
 
             {/* CONTROLES */}
-            <div className="flex justify-between w-full mt-6">
+            <div className="mt-6 flex w-full shrink-0 justify-between">
               <button
                 onClick={prevStep}
                 className="px-6 py-2 bg-gray-600 text-white rounded-full hover:bg-gray-700 transition"
@@ -172,91 +163,7 @@ export default function RecipePage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-yellow-400 text-white py-10 mt-auto">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* LOGO + COPYRIGHT */}
-          <div>
-            <h2 className="text-2xl font-bold">CookMaster</h2>
-            <p className="mt-2">&copy; 2025 CookMaster. Tous droits réservés.</p>
-          </div>
-
-          {/* NAVIGATION RAPIDE */}
-          <div>
-            <h3 className="font-semibold mb-3">Navigation</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="hover:underline">
-                  Accueil
-                </Link>
-              </li>
-              <li>
-                <Link href="/recipes" className="hover:underline">
-                  Recettes
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:underline">
-                  À propos
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:underline">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* CONTACT */}
-          <div>
-            <h3 className="font-semibold mb-3">Contact</h3>
-            <p className="flex items-center gap-2">
-              <Mail size={18} /> support@cookmaster.com
-            </p>
-            <p className="flex items-center gap-2 mt-2">
-              <Phone size={18} /> +33 6 12 34 56 78
-            </p>
-          </div>
-
-          {/* RÉSEAUX + NEWSLETTER */}
-          <div>
-            <h3 className="font-semibold mb-3">Suivez-nous</h3>
-            <div className="flex gap-4 mb-4">
-              <Link href="#" className="hover:opacity-80">
-                <FacebookIcon />
-              </Link>
-              <Link href="#" className="hover:opacity-80">
-                <InstagramIcon />
-              </Link>
-              <Link href="#" className="hover:opacity-80">
-                <X />
-              </Link>
-            </div>
-            <form
-              className="flex flex-col gap-2"
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert("Merci pour votre inscription !");
-              }}
-            >
-              <input
-                type="email"
-                name="email"
-                placeholder="Votre email"
-                className="px-3 py-2 rounded text-gray-800"
-                required
-              />
-              <button
-                type="submit"
-                className="bg-white text-yellow-500 font-bold rounded py-2 hover:bg-yellow-100 transition"
-              >
-                S’abonner
-              </button>
-            </form>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import viandes from "../../../data/viandes";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 export default function ViandePage() {
   const pathname = usePathname();
@@ -24,17 +26,7 @@ export default function ViandePage() {
 
   return (
     <div className="min-h-screen bg-yellow-50 font-sans flex flex-col">
-      {/* HEADER */}
-      <header className="bg-yellow-400 text-white px-8 py-6 shadow-md flex justify-between items-center sticky top-0 z-50">
-        <Link href="/" className="text-2xl font-bold">
-          CookMaster
-        </Link>
-        <nav className="space-x-4">
-          <Link href="/">Accueil</Link>
-          <Link href="/recipes">Recettes</Link>
-          <Link href="/viandes">Viandes</Link>
-        </nav>
-      </header>
+      <Header />
 
       {/* CONTENU PRINCIPAL */}
       <div className="px-4 py-16 max-w-4xl mx-auto w-full">
@@ -59,7 +51,7 @@ export default function ViandePage() {
 
           {/* SLIDER DES ÉTAPES */}
           <h2 className="text-2xl font-semibold mt-12 mb-6 text-gray-500">Étapes</h2>
-          <div className="relative w-full h-[400px] flex flex-col items-center">
+          <div className="relative flex h-[460px] w-full flex-col items-center">
             {/* Barre de progression */}
             <div className="w-full bg-gray-200 h-2 rounded-full mb-4">
               <div
@@ -77,7 +69,7 @@ export default function ViandePage() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ duration: 0.5 }}
-                className="w-full h-full flex flex-col items-center"
+                className="flex h-full w-full flex-col items-center"
               >
                 <div className="relative w-full h-72 rounded-xl overflow-hidden shadow-lg mb-4">
                   <Image
@@ -87,14 +79,14 @@ export default function ViandePage() {
                     className="object-cover"
                   />
                 </div>
-                <p className="text-lg text-gray-800 font-medium text-center">
+                <p className="flex h-16 w-full items-center justify-center text-center text-lg font-medium text-gray-800">
                   Étape {stepIndex + 1}: {steps[stepIndex].text}
                 </p>
               </motion.div>
             </AnimatePresence>
 
             {/* CONTROLES */}
-            <div className="flex justify-between w-full mt-6">
+            <div className="mt-6 flex w-full shrink-0 justify-between">
               <button
                 onClick={prevStep}
                 className="px-6 py-2 bg-gray-600 text-white rounded-full hover:bg-gray-700 transition"
@@ -111,7 +103,7 @@ export default function ViandePage() {
           </div>
 
           {/* CONSEILS POUR LA RECETTE */}
-          <h2 className="text-2xl font-semibold mt-16 mb-6 text-gray-500">
+          <h2 className="text-2xl font-semibold mt-10 mb-6 text-gray-500">
             Conseils pour cette recette
           </h2>
           <ul className="list-disc list-inside text-gray-700">
@@ -169,6 +161,7 @@ export default function ViandePage() {
     )}
   </div>
 </section>
+  <Footer />
     </div>
   );
 }

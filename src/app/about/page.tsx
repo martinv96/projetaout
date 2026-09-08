@@ -6,6 +6,8 @@ import { Code, Rocket, Heart } from "lucide-react";
 import { Mail, Phone, InstagramIcon, FacebookIcon, X } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function About() {
     const [email, setEmail] = useState("");
@@ -34,31 +36,7 @@ export default function About() {
   };
   return (
     <main className="bg-gray-100 min-h-screen text-gray-800">
-      {/* HEADER */}
-      <motion.header
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="bg-yellow-400 text-white px-8 py-6 shadow-md flex justify-between items-center"
-      >
-        <Link href="/" className="text-2xl font-bold">
-          CookMaster
-        </Link>
-        <nav className="space-x-4">
-          <Link href="/" className="hover:text-yellow-100 transition">
-            Accueil
-          </Link>
-          <Link href="/recipes" className="hover:text-yellow-100 transition">
-            Recettes
-          </Link>
-          <Link
-            href="/contact"
-            className="hover:text-yellow-100 transition font-semibold"
-          >
-            Contact
-          </Link>
-        </nav>
-      </motion.header>
+      <Header />
       {/* HERO */}
       <section className="bg-yellow-300 text-white py-16">
         <div className="max-w-6xl mx-auto px-6 text-center">
@@ -158,7 +136,8 @@ export default function About() {
           </a>
         </div>
       </section>
-      {/* FOOTER */}
+      <Footer />
+      {false && (
       <footer className="bg-yellow-400 text-white py-10 mt-auto">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* LOGO + COPYRIGHT */}
@@ -241,6 +220,7 @@ export default function About() {
           </div>
         </div>
       </footer>
+      )}
     </main>
   );
 }

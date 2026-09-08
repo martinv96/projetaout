@@ -6,6 +6,8 @@ import { useState } from "react";
 import recipes from "../../data/recipes";
 import recipesViande from "../../data/viandes";
 import { Mail, Phone, InstagramIcon, FacebookIcon, X } from "lucide-react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function RecipesPage() {
   const [emailNewsletter, setEmailNewsletter] = useState("");
@@ -41,65 +43,50 @@ export default function RecipesPage() {
     }
   };
 
+  const normalizedSearchQuery = searchQuery.trim().toLowerCase();
   const filteredRecipes = recipes.filter((recipe) =>
-  recipe.title.toLowerCase().includes(searchQuery.toLowerCase())
-);
+    recipe.title.toLowerCase().includes(normalizedSearchQuery)
+  );
 
-const filteredRecipesViande = recipesViande.filter((recipe) =>
-  recipe.title.toLowerCase().includes(searchQuery.toLowerCase())
-);
+  const filteredRecipesViande = recipesViande.filter((recipe) =>
+    recipe.title.toLowerCase().includes(normalizedSearchQuery)
+  );
+
+  const hasSearch = normalizedSearchQuery.length > 0;
+  const hasResults = filteredRecipes.length > 0 || filteredRecipesViande.length > 0;
 
 const [showTitles, setShowTitles] = useState(true);
 
   return (
     <div className="min-h-screen bg-yellow-50 font-sans">
-      {/* HEADER */}
-      <motion.header
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="bg-yellow-400 text-white px-8 py-6 shadow-md flex justify-between items-center"
-      >
-        <Link href="/" className="text-2xl font-bold">
-          CookMaster
-        </Link>
-        <nav className="space-x-4">
-          <Link href="/" className="hover:text-yellow-100 transition">
-            Accueil
-          </Link>
-          <Link
-            href="/recipes"
-            className="hover:text-yellow-100 transition font-semibold"
-          >
-            Recettes
-          </Link>
-          <Link href="/contact" className="hover:text-yellow-100 transition">
-            Contact
-          </Link>
-        </nav>
-      </motion.header>
+      <Header />
 
       {/* SEARCH SECTION */}
       <section className="px-8 py-8 bg-yellow-100">
   <div className="max-w-4xl mx-auto">
-    <div className="relative">
+    <form
+      className="relative"
+      onSubmit={(event) => {
+        event.preventDefault();
+        setSearchQuery(searchTerm);
+        setShowTitles(searchTerm.trim().length === 0);
+      }}
+    >
       <input
-        type="text"
+        type="search"
         placeholder="🔍 Rechercher une recette..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className="w-full px-6 py-3 border border-gray-300 rounded-full shadow-md text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-yellow-400 transition-all duration-300"
+        aria-label="Rechercher une recette"
       />
       <button
-  onClick={() => {
-    setSearchQuery(searchTerm); // Met à jour la recherche déclenchée
-    setShowTitles(false); // Cache les titres
-  }}
-  className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-yellow-400 text-white px-4 py-2 rounded-full font-semibold hover:bg-yellow-500 transition-all duration-300"
->
-  Rechercher
-</button>
-    </div>
+        type="submit"
+        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-yellow-400 px-4 py-2 font-semibold text-white transition-all duration-300 hover:bg-yellow-500"
+      >
+        Rechercher
+      </button>
+    </form>
   </div>
 </section>
 
@@ -128,6 +115,25 @@ const [showTitles, setShowTitles] = useState(true);
       Nos recettes populaires
     </h3>
   )}
+  {hasSearch && !hasResults ? (
+    <div className="rounded-2xl bg-white px-6 py-12 text-center shadow-md">
+      <h3 className="text-2xl font-bold text-gray-800">Aucun résultat</h3>
+      <p className="mt-2 text-gray-600">
+        Aucune recette ne correspond à « {searchQuery.trim()} ».
+      </p>
+      <button
+        type="button"
+        onClick={() => {
+          setSearchTerm("");
+          setSearchQuery("");
+          setShowTitles(true);
+        }}
+        className="mt-6 rounded-full bg-yellow-400 px-5 py-2 font-semibold text-white transition hover:bg-yellow-500"
+      >
+        Réinitialiser la recherche
+      </button>
+    </div>
+  ) : (
   <div className="grid md:grid-cols-3 gap-8">
     {filteredRecipes.map((recipe, index) => (
       <motion.div
@@ -160,9 +166,11 @@ const [showTitles, setShowTitles] = useState(true);
       </motion.div>
     ))}
   </div>
+  )}
 </section>
 
       {/* RECIPES VIANDES */}
+      {hasResults && (
       <section className="px-8 py-16">
   {showTitles && (
     <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">
@@ -202,8 +210,10 @@ const [showTitles, setShowTitles] = useState(true);
     ))}
   </div>
 </section>
+  )}
 
-      {/* FOOTER */}
+      <Footer />
+      {false && (
       <footer className="bg-yellow-400 text-white py-10 mt-auto">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* LOGO + COPYRIGHT */}
@@ -293,6 +303,7 @@ const [showTitles, setShowTitles] = useState(true);
           </div>
         </div>
       </footer>
+      )}
     </div>
   );
 }

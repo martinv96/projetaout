@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Mail, Phone, InstagramIcon, FacebookIcon, X } from "lucide-react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const recipes = [
   {
@@ -184,28 +186,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-yellow-50 font-sans flex flex-col">
-      {/* HEADER */}
-      <motion.header
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="bg-yellow-400 text-white px-4 py-4 shadow-md flex flex-col gap-3 md:px-8 md:py-6 md:flex-row md:justify-between md:items-center"
-      >
-        <Link href="/" className="text-xl font-bold md:text-2xl">
-          CookMaster
-        </Link>
-        <nav className="flex flex-wrap items-center justify-center gap-3 text-sm md:gap-4 md:text-base">
-          <Link href="/" className="hover:text-yellow-100 transition">
-            Accueil
-          </Link>
-          <Link href="/recipes" className="hover:text-yellow-100 transition">
-            Recettes
-          </Link>
-          <Link href="/contact" className="hover:text-yellow-100 transition">
-            Contact
-          </Link>
-        </nav>
-      </motion.header>
+      <Header />
       {/* HERO */}
       <motion.section
         initial={{ opacity: 0 }}
@@ -304,13 +285,13 @@ export default function Home() {
               transition={{ delay: index * 0.2, duration: 0.6 }}
               className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transform hover:scale-105 transition"
             >
-              <div className="relative w-full h-56 md:h-64">
+              <div className="relative h-56 w-full bg-gray-100 md:aspect-[16/9] md:h-auto">
                 <Image
                   src={recipe.image}
                   alt={recipe.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
+                  className="object-cover md:object-contain"
                   priority
                 />
               </div>
@@ -392,7 +373,9 @@ export default function Home() {
         </div>
       </section>
       {/* FOOTER */}
-      <footer className="bg-yellow-400 text-white py-8 mt-auto md:py-10">
+      <Footer />
+      {false && (
+      <footer className="bg-yellow-400 py-8 mt-auto text-white md:py-10">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4 md:px-6 md:gap-8">
           {/* LOGO + COPYRIGHT */}
           <div>
@@ -503,6 +486,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      )}
     </div>
   );
 }

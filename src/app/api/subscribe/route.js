@@ -32,72 +32,128 @@ export async function POST(req) {
         to: [{ email: normalizedEmail }],
         subject: "Bienvenue sur CookMaster 🍳",
         htmlContent: `
-    <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #fff8e1; color: #333;">
-      
-      <!-- HERO -->
-      <div style="text-align: center; margin-bottom: 40px;">
-        <h1 style="color: #FDC700; font-size: 32px;">Bienvenue sur CookMaster !</h1>
-        <p style="font-size: 16px; margin: 10px 0;">
-          Découvrez des <strong>recettes faciles à préparer</strong> pour tous les goûts.
-        </p>
-        <a href="https://projetaout.vercel.app/recipes" style="display: inline-block; margin-top: 15px; padding: 12px 24px; background-color: #FDC700; color: #000; font-weight: bold; text-decoration: none; border-radius: 8px;">
-          Voir toutes les recettes
-        </a>
-      </div>
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #fcf8f2; font-family: Arial, sans-serif;">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #fcf8f2; padding: 20px 0;">
+        <tr>
+          <td align="center">
+            <!-- Conteneur principal (Largeur max 600px pour les clients mail) -->
+            <table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+              
+              <!-- HERO -->
+              <tr>
+                <td align="center" style="padding: 40px 30px; background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);">
+                  <h1 style="color: #d97706; font-size: 28px; margin: 0 0 15px 0;">Bienvenue sur CookMaster ! 🍳</h1>
+                  <p style="font-size: 16px; color: #4b5563; line-height: 1.5; margin: 0 0 25px 0;">
+                    Découvrez des <strong>recettes faciles à préparer</strong> pour régaler vos proches au quotidien.
+                  </p>
+                  <a href="https://projetaout.vercel.app/recipes" target="_blank" style="display: inline-block; padding: 12px 28px; background-color: #f59e0b; color: #ffffff; font-weight: bold; text-decoration: none; border-radius: 8px; font-size: 15px;">
+                    Voir toutes les recettes
+                  </a>
+                </td>
+              </tr>
 
-      <!-- COOKING TIPS -->
-      <div style="background-color: #FFF9E5; padding: 20px; border-radius: 12px; margin-bottom: 40px;">
-        <h2 style="color: #F7A400; font-size: 24px; margin-bottom: 15px;">🧑‍🍳 Astuces de cuisine</h2>
-        <ul style="list-style-type: none; padding: 0; font-size: 14px; line-height: 1.6;">
-          <li>💡 Mélangez toujours les épices avant de les ajouter à vos plats.</li>
-          <li>⏱️ Préparez vos ingrédients à l’avance pour gagner du temps.</li>
-          <li>🌿 Utilisez des herbes fraîches pour rehausser le goût.</li>
-        </ul>
-      </div>
+              <!-- COOKING TIPS -->
+              <tr>
+                <td style="padding: 30px;">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 8px 8px 0; padding: 20px;">
+                    <tr>
+                      <td>
+                        <h2 style="color: #b45309; font-size: 18px; margin: 0 0 12px 0;">🧑‍🍳 Astuces de cuisine</h2>
+                        <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #374151; line-height: 1.6;">
+                          <li style="margin-bottom: 6px;"><strong>Mélangez</strong> toujours les épices avant de les ajouter à vos plats.</li>
+                          <li style="margin-bottom: 6px;"><strong>Préparez</strong> vos ingrédients à l’avance pour gagner du temps.</li>
+                          <li><strong>Utilisez</strong> des herbes fraîches pour rehausser le goût.</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
 
-      <!-- RECIPES -->
-      <div style="margin-bottom: 40px;">
-        <h2 style="font-size: 24px; color: #333; text-align: center; margin-bottom: 20px;">Nos recettes populaires</h2>
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
-          <a href="https://projetaout.vercel.app/recipes/1" style="display: block; width: 200px; text-decoration: none; color: #000; background-color: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <img src="https://projetaout.vercel.app/_next/image?url=%2Ftarte.jpg&w=1920&q=75" alt="Tarte aux pommes" style="width: 100%; height: 120px; object-fit: cover;">
-            <div style="padding: 10px;">
-              <h3 style="font-size: 16px; font-weight: bold;">🍏 Tarte aux pommes</h3>
-              <p style="font-size: 14px; color: #666;">Une recette simple pour tarte aux pommes.</p>
-            </div>
-          </a>
-          <a href="https://projetaout.vercel.app/recipes/3" style="display: block; width: 200px; text-decoration: none; color: #000; background-color: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <img src="https://projetaout.vercel.app/_next/image?url=%2Fsalade.jpg&w=1920&q=75" alt="Salade fraîcheur" style="width: 100%; height: 120px; object-fit: cover;">
-            <div style="padding: 10px;">
-              <h3 style="font-size: 16px; font-weight: bold;">🥗 Salade fraîcheur</h3>
-              <p style="font-size: 14px; color: #666;">Fraîche et légère, parfaite pour vos repas d’été.</p>
-            </div>
-          </a>
-          <a href="https://projetaout.vercel.app/recipes/2" style="display: block; width: 200px; text-decoration: none; color: #000; background-color: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <img src="https://projetaout.vercel.app/_next/image?url=%2Fcarbonara.jpg&w=1920&q=75" alt="Spaguetti Carbonara" style="width: 100%; height: 120px; object-fit: cover;">
-            <div style="padding: 10px;">
-              <h3 style="font-size: 16px; font-weight: bold;">🍝 Spaguetti Carbonara</h3>
-              <p style="font-size: 14px; color: #666;">Un plat classique italien, crémeux et gourmand.</p>
-            </div>
-          </a>
-        </div>
-      </div>
+              <!-- RECIPES SECTION -->
+              <tr>
+                <td style="padding: 10px 30px 30px 30px;">
+                  <h2 style="font-size: 20px; color: #1f2937; text-align: center; margin-bottom: 20px;">Nos recettes populaires</h2>
+                  
+                  <!-- Grille de recettes avec des tableaux pour compatibilité Outlook/Gmail -->
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                      <!-- Recette 1 -->
+                      <td align="center" width="33%" style="padding: 5px; vertical-align: top;">
+                        <a href="https://projetaout.vercel.app/recipes/1" target="_blank" style="text-decoration: none; color: inherit; display: block; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; background: #fff;">
+                          <img src="https://projetaout.vercel.app/_next/image?url=%2Ftarte.jpg&w=1920&q=75" alt="Tarte aux pommes" width="100%" height="100" style="display: block; object-fit: cover;">
+                          <div style="padding: 10px; text-align: left;">
+                            <h3 style="font-size: 14px; font-weight: bold; margin: 0 0 5px 0; color: #111827;">🍏 Tarte aux pommes</h3>
+                            <p style="font-size: 12px; color: #6b7280; margin: 0; line-height: 1.4;">Une recette simple et gourmande.</p>
+                          </div>
+                        </a>
+                      </td>
+                      <!-- Recette 2 -->
+                      <td align="center" width="33%" style="padding: 5px; vertical-align: top;">
+                        <a href="https://projetaout.vercel.app/recipes/3" target="_blank" style="text-decoration: none; color: inherit; display: block; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; background: #fff;">
+                          <img src="https://projetaout.vercel.app/_next/image?url=%2Fsalade.jpg&w=1920&q=75" alt="Salade fraîcheur" width="100%" height="100" style="display: block; object-fit: cover;">
+                          <div style="padding: 10px; text-align: left;">
+                            <h3 style="font-size: 14px; font-weight: bold; margin: 0 0 5px 0; color: #111827;">🥗 Salade fraîcheur</h3>
+                            <p style="font-size: 12px; color: #6b7280; margin: 0; line-height: 1.4;">Fraîche et légère pour l’été.</p>
+                          </div>
+                        </a>
+                      </td>
+                      <!-- Recette 3 -->
+                      <td align="center" width="33%" style="padding: 5px; vertical-align: top;">
+                        <a href="https://projetaout.vercel.app/recipes/2" target="_blank" style="text-decoration: none; color: inherit; display: block; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; background: #fff;">
+                          <img src="https://projetaout.vercel.app/_next/image?url=%2Fcarbonara.jpg&w=1920&q=75" alt="Spaghetti Carbonara" width="100%" height="100" style="display: block; object-fit: cover;">
+                          <div style="padding: 10px; text-align: left;">
+                            <h3 style="font-size: 14px; font-weight: bold; margin: 0 0 5px 0; color: #111827;">🍝 Carbonara</h3>
+                            <p style="font-size: 12px; color: #6b7280; margin: 0; line-height: 1.4;">Un classique italien crémeux.</p>
+                          </div>
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
 
-      <!-- ABOUT -->
-      <div style="background-color: #F5F5F5; padding: 20px; border-radius: 12px; text-align: center;">
-        <h2 style="font-size: 22px; color: #E53935; margin-bottom: 15px;">À propos de CookMaster</h2>
-        <p style="font-size: 14px; color: #555; line-height: 1.5; margin-bottom: 20px;">
-          CookMaster est une plateforme dédiée aux passionnés de cuisine. Notre objectif est de partager des recettes variées, simples et gourmandes pour inspirer vos repas au quotidien.
-        </p>
-        <a href="https://projetaout.vercel.app/recipes" style="display: inline-block; padding: 12px 24px; background-color: #E53935; color: #fff; font-weight: bold; text-decoration: none; border-radius: 8px;">
-          Découvrir nos recettes
-        </a>
-      </div>
+              <!-- ABOUT -->
+              <tr>
+                <td style="padding: 0 30px 40px 30px;">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f9fafb; border-radius: 8px; padding: 20px; text-align: center;">
+                    <tr>
+                      <td>
+                        <h2 style="font-size: 18px; color: #374151; margin: 0 0 10px 0;">À propos de CookMaster</h2>
+                        <p style="font-size: 13px; color: #6b7280; line-height: 1.5; margin: 0 0 15px 0;">
+                          CookMaster est une plateforme dédiée aux passionnés de cuisine pour inspirer vos repas au quotidien.
+                        </p>
+                        <a href="https://projetaout.vercel.app/recipes" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #374151; color: #ffffff; font-weight: bold; text-decoration: none; border-radius: 6px; font-size: 13px;">
+                          Découvrir nos recettes
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
 
-      <p style="text-align: center; font-size: 12px; color: #999; margin-top: 30px;">
-        Vous recevez cet e-mail car vous vous êtes inscrit(e) à la newsletter CookMaster.
-      </p>
-    </div>
+              <!-- FOOTER -->
+              <tr>
+                <td align="center" style="padding: 20px 30px; background-color: #f3f4f6; color: #9ca3af; font-size: 11px; line-height: 1.4;">
+                  <p style="margin: 0;">
+                    Vous recevez cet e-mail suite à votre inscription sur CookMaster.<br>
+                    © 2026 CookMaster. Tous droits réservés.
+                  </p>
+                </td>
+              </tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
   `,
       }),
     });
