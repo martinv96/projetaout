@@ -23,6 +23,8 @@ const ContactPage: React.FC = () => {
         body: JSON.stringify({ name, email, message }),
       });
 
+      const result = await response.json().catch(() => ({}));
+
       if (response.ok) {
         setStatus("success");
         setName("");
@@ -30,6 +32,7 @@ const ContactPage: React.FC = () => {
         setMessage("");
         setTimeout(() => setStatus("idle"), 5000); // Reset après 5s
       } else {
+        console.error("Erreur API contact :", result.error);
         setStatus("error");
       }
     } catch (err) {

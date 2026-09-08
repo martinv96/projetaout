@@ -1,30 +1,37 @@
-// app/api/subscribe/route.js
-import { Resend } from "resend";
-
-const resend = process.env.RESEND_API_KEY
-  ? new Resend(process.env.RESEND_API_KEY)
-  : null;
-
 export async function POST(req) {
   const { email } = await req.json();
+  const normalizedEmail = email?.trim();
 
-  if (!email) {
+  if (!normalizedEmail) {
     return new Response(JSON.stringify({ error: "Email requis" }), { status: 400 });
   }
 
-  if (!resend) {
+  if (
+    !process.env.BREVO_API_KEY ||
+    !process.env.BREVO_SENDER_EMAIL
+  ) {
     return new Response(
-      JSON.stringify({ error: "Service d'email non configuré. Ajoute RESEND_API_KEY." }),
+      JSON.stringify({ error: "Service d'email non configuré." }),
       { status: 503 }
     );
   }
 
   try {
-    await resend.emails.send({
-      from: "CookMaster <onboarding@resend.dev>",
-      to: email,
-      subject: "Bienvenue sur CookMaster 🍳",
-      html: `
+    const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "api-key": process.env.BREVO_API_KEY,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        sender: {
+          email: process.env.BREVO_SENDER_EMAIL,
+          name: process.env.BREVO_SENDER_NAME || "CookMaster",
+        },
+        to: [{ email: normalizedEmail }],
+        subject: "Bienvenue sur CookMaster 🍳",
+        htmlContent: `
     <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #fff8e1; color: #333;">
       
       <!-- HERO -->
@@ -92,9 +99,21 @@ export async function POST(req) {
       </p>
     </div>
   `,
+      }),
     });
 
-    return new Response(JSON.stringify({ success: true }), { status: 200 });
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      console.error("Erreur Brevo newsletter :", result);
+      return new Response(
+        JSON.stringify({ error: result.message || "Impossible d'envoyer l'email" }),
+        { status: 502 }
+      );
+    }
+
+    console.info("Newsletter acceptée par Brevo :", result.messageId);
+    return new Response(JSON.stringify({ success: true, messageId: result.messageId }), { status: 200 });
   } catch (err) {
     console.error("Erreur lors de l'envoi de l'email :", err);
     return new Response(JSON.stringify({ error: "Impossible d'envoyer l'email" }), { status: 500 });
