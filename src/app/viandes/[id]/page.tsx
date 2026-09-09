@@ -115,7 +115,7 @@ export default function ViandePage() {
           </ul>
 
           <Link
-            href="/recipes"
+            href="/viandes"
             className="mt-12 inline-block bg-yellow-400 text-white px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition shadow-md"
           >
             Retour aux viandes
