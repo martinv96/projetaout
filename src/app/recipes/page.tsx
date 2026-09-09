@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import recipes from "../../data/recipes";
 import recipesViande from "../../data/viandes";
-import { Mail, Phone, InstagramIcon, FacebookIcon, X } from "lucide-react";
+import { Mail, Phone, InstagramIcon, FacebookIcon, Search, X } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -62,33 +62,38 @@ const [showTitles, setShowTitles] = useState(true);
       <Header />
 
       {/* SEARCH SECTION */}
-      <section className="px-8 py-8 bg-yellow-100">
-  <div className="max-w-4xl mx-auto">
-    <form
-      className="relative"
-      onSubmit={(event) => {
-        event.preventDefault();
-        setSearchQuery(searchTerm);
-        setShowTitles(searchTerm.trim().length === 0);
-      }}
-    >
-      <input
-        type="search"
-        placeholder="🔍 Rechercher une recette..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full px-6 py-3 border border-gray-300 rounded-full shadow-md text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-yellow-400 transition-all duration-300"
-        aria-label="Rechercher une recette"
-      />
-      <button
-        type="submit"
-        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-yellow-400 px-4 py-2 font-semibold text-white transition-all duration-300 hover:bg-yellow-500"
-      >
-        Rechercher
-      </button>
-    </form>
-  </div>
-</section>
+      <section className="bg-[#f2e8a7] px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <form
+            className="flex items-center gap-3 rounded-full border-[3px] border-[#9bb4d6] bg-[#f3f3ef] px-3 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]"
+            onSubmit={(event) => {
+              event.preventDefault();
+              setSearchQuery(searchTerm);
+              setShowTitles(searchTerm.trim().length === 0);
+            }}
+          >
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#eef4fb] text-[#4f647f]">
+              <Search size={20} strokeWidth={2.3} />
+            </div>
+
+            <input
+              type="search"
+              placeholder="Rechercher une recette..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="min-w-0 flex-1 border-0 bg-transparent text-base text-gray-800 placeholder:text-[#56657a] focus:outline-none sm:text-lg"
+              aria-label="Rechercher une recette"
+            />
+
+            <button
+              type="submit"
+              className="rounded-full bg-[#f3be2a] px-5 py-2.5 text-sm font-bold text-[#1f2937] shadow-[0_2px_0_rgba(0,0,0,0.08)] transition hover:bg-[#e9b116] sm:text-base"
+            >
+              Rechercher
+            </button>
+          </form>
+        </div>
+      </section>
 
       {/* HERO SECTION */}
       <motion.section
